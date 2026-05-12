@@ -3,4 +3,4 @@ contact us on any of our supported platforms.ss
 
 
 Mother Spirit links:
-https://motherspirit.criome.net
+https://mother-spirit.com
