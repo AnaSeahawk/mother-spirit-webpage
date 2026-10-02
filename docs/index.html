@@ -47,7 +47,7 @@
   <section class="spaces" aria-labelledby="spaces-h">
     <div>
       <p class="label" id="spaces-h">Where we gather</p>
-      <p class="intro">Come as you are. Introduce yourself, share what brought you here, or simply observe.</p>
+      <p class="intro">Introduce yourself, share what brought you here, or simply observe.</p>
     </div>
 
     <div class="platform">
@@ -116,7 +116,7 @@
   <section class="posted" aria-labelledby="posted-h">
     <div>
       <h2 id="posted-h">Stay up to date</h2>
-      <p class="promise">You’ll only hear from us about free events, like the monthly community call, and the occasional significant update.</p>
+      <p class="promise">You’ll only hear from us about free events, like the monthly community call, and the occasional significant update. After signing up, look for a confirmation email; it sometimes lands in spam.</p>
     </div>
     <form class="form" id="keep-posted" action="https://app.kit.com/forms/9993901/subscriptions" method="post" novalidate>
       <input id="ms-email" name="email_address" type="email" placeholder="your email" autocomplete="email" aria-label="Email address" required>
@@ -188,7 +188,7 @@
         var reply = await res.json();
         if (reply.status === 'success') {
           form.hidden = true;
-          say('Thank you, you’re on the list. If a confirmation email arrives, please click the link inside.', true);
+          say('Thank you. Please check your inbox, and your spam folder, for a confirmation email.', true);
         } else if (reply.status === 'quarantined' && reply.url) {
           note.className = 'form-note';
           note.innerHTML = 'One more step: <a href="' + reply.url + '" target="_blank" rel="noopener">complete a quick check</a> to finish signing up.';
