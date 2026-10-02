@@ -118,7 +118,7 @@
       <h2 id="posted-h">Stay up to date</h2>
       <p class="promise">You’ll only hear from us about free events, like the monthly community call, and the occasional significant update.</p>
     </div>
-    <form class="form" id="keep-posted" data-kit-action="https://app.kit.com/forms/9993901/subscriptions" method="post" novalidate>
+    <form class="form" id="keep-posted" action="https://app.kit.com/forms/9993901/subscriptions" method="post" novalidate>
       <input id="ms-email" name="email_address" type="email" placeholder="your email" autocomplete="email" aria-label="Email address" required>
       <input id="ms-name" name="fields[first_name]" type="text" placeholder="first name (optional)" autocomplete="given-name" aria-label="First name">
       <button type="submit">Keep me posted</button>
@@ -140,25 +140,66 @@
   <footer>Mother Spirit · mother-spirit.com</footer>
 </div>
 <script>
-  // On the live domain the form posts to Kit; anywhere else (previews) it only shows a note.
+  // Signup: same exchange Kit's own embed script performs (reCAPTCHA v3 token + JSON reply),
+  // so subscribers are confirmed on the page instead of on Kit's "One more step" screen.
   (function () {
+    var SITE_KEY = '6LdkIV0UAAAAABtNVAAP99TC6f_18LiETnPK6ziX'; // Kit's public reCAPTCHA key
     var form = document.getElementById('keep-posted');
     var note = document.getElementById('form-note');
     var email = document.getElementById('ms-email');
-    var live = /(^|\.)mother-spirit\.com$/.test(location.hostname);
-    if (live) form.action = form.dataset.kitAction;
-    form.addEventListener('submit', function (e) {
+    var button = form.querySelector('button');
+    var captcha;
+
+    function loadCaptcha() {
+      if (captcha) return captcha;
+      captcha = new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
+        s.onload = function () { grecaptcha.ready(resolve); };
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+      return captcha;
+    }
+    email.addEventListener('focus', loadCaptcha, { once: true });
+
+    function say(text, ok) { note.className = ok ? 'form-note done' : 'form-note'; note.textContent = text; }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
       if (!email.value || !email.checkValidity()) {
-        e.preventDefault();
-        note.className = 'form-note';
-        note.textContent = 'Enter an email address, like name@example.com.';
+        say('Enter an email address, like name@example.com.');
         email.focus();
         return;
       }
-      if (live) return;
-      e.preventDefault();
-      note.className = 'form-note done';
-      note.textContent = 'Preview only: on mother-spirit.com this signs you up.';
+      button.disabled = true;
+      say('Sending…');
+      var data = new FormData(form);
+      try {
+        await loadCaptcha();
+        data.append('token', await grecaptcha.execute(SITE_KEY, { action: 'formsubmit' }));
+      } catch (err) { data.append('token', ''); }
+      data.append('referrer', document.referrer);
+      data.append('host', location.href);
+      data.append('search', location.search);
+      data.append('ckjs_version', '6');
+      try {
+        var res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json', 'X-CKJS-Version': '6' } });
+        var reply = await res.json();
+        if (reply.status === 'success') {
+          form.hidden = true;
+          say('Thank you, you’re on the list. If a confirmation email arrives, please click the link inside.', true);
+        } else if (reply.status === 'quarantined' && reply.url) {
+          note.className = 'form-note';
+          note.innerHTML = 'One more step: <a href="' + reply.url + '" target="_blank" rel="noopener">complete a quick check</a> to finish signing up.';
+        } else {
+          say('That didn’t go through. Check the address and try again.');
+        }
+      } catch (err) {
+        form.submit(); // network or script trouble: fall back to Kit's own page
+      } finally {
+        button.disabled = false;
+      }
     });
   })();
 </script>

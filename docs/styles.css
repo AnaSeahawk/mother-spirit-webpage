@@ -155,3 +155,6 @@
     .emblem { animation: none; }
     .links .go, .form button, .give-links a { transition: none; }
   }
+.form[hidden] { display: none; }
+.form-note a { color: var(--teal); text-underline-offset: 0.2em; }
+.form button:disabled { opacity: 0.6; cursor: wait; }
