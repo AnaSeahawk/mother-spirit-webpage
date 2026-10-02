@@ -1,0 +1,157 @@
+/* Mother Spirit is a night-sky page by design: the emblem's glow needs a dark ground. */
+  :root {
+    color-scheme: dark;
+    --ink: #090b15;
+    --ink-raised: #10132a;
+    --line: #24284a;
+    --text: #e9e7f4;
+    --muted: #a3a1c2;
+    --faint: #6f6d93;
+    --teal: #45e3c8;
+    --blue: #4f7bff;
+    --violet: #b264ff;
+    --serif: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  body {
+    background:
+      radial-gradient(60rem 40rem at 50% -8rem, rgba(79, 123, 255, 0.16), transparent 70%),
+      radial-gradient(30rem 24rem at 50% 6rem, rgba(178, 100, 255, 0.10), transparent 70%),
+      var(--ink);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    padding-inline: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 36rem; margin: 0 auto; padding-block: 3.5rem 3rem; display: grid; gap: 4.5rem; }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
+  .label {
+    font-size: 0.8125rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); font-weight: 500; margin: 0 0 1rem;
+  }
+  h2 { font-weight: 500; font-size: 1.875rem; line-height: 1.2; margin: 0 0 1rem; text-wrap: balance; }
+  p { margin: 0 0 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* Arrival */
+  .arrival { text-align: center; display: grid; justify-items: center; gap: 0.25rem; }
+  .emblem {
+    width: min(15rem, 62vw); height: auto; aspect-ratio: 1; max-width: 100%;
+    filter: drop-shadow(0 0 1.5rem rgba(79, 123, 255, 0.35));
+    animation: breathe 9s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(79, 123, 255, 0.28)); }
+    50% { filter: drop-shadow(0 0 2.25rem rgba(69, 227, 200, 0.40)); }
+  }
+  h1 { font-weight: 400; font-size: clamp(2.75rem, 11vw, 4rem); line-height: 1; letter-spacing: 0.01em; margin: 1.25rem 0 0.75rem; }
+  .tagline { font-style: italic; font-size: 1.375rem; color: var(--text); margin: 0; }
+  .practices {
+    list-style: none; padding: 0; margin: 1.25rem 0 0;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 0;
+    color: var(--muted); font-size: 1.0625rem;
+  }
+  .practices li + li::before { content: "·"; color: var(--faint); margin: 0 0.6rem; }
+
+  /* Navigation */
+  .topnav { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1.5rem; padding-top: 1.25rem; font-size: 1.0625rem; }
+  .topnav .home { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text); }
+  .topnav .home img { width: 2.25rem; height: 2.25rem; }
+  .topnav ul { list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
+  .topnav ul a { color: var(--muted); text-decoration: none; letter-spacing: 0.04em; border-bottom: 1px solid transparent; padding-bottom: 0.15rem; }
+  .topnav ul a:hover { color: var(--text); border-bottom-color: var(--teal); }
+  .topnav ul a[aria-current="page"] { color: var(--text); border-bottom-color: var(--violet); }
+  .page-head { display: grid; gap: 0.5rem; }
+  .page-head h1 { font-size: clamp(2.25rem, 9vw, 3.25rem); margin: 0; }
+  .subhead { font-weight: 500; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 2.25rem 0 0.75rem; }
+  .back { color: var(--muted); text-decoration-color: var(--faint); text-underline-offset: 0.2em; }
+  .back:hover { color: var(--text); text-decoration-color: var(--teal); }
+  .arrival .verse { margin-top: 2.5rem; }
+  .spaces .intro { color: var(--muted); }
+
+  /* Keep me posted */
+  .posted {
+    border: 1px solid var(--line); border-radius: 14px; background: var(--ink-raised);
+    padding: 1.75rem 1.5rem; display: grid; gap: 1.25rem;
+    box-shadow: 0 0 0 1px rgba(69, 227, 200, 0.05), 0 1.5rem 3rem -1.5rem rgba(79, 123, 255, 0.35);
+  }
+  .posted h2 { margin-bottom: 0.5rem; }
+  .posted .promise { color: var(--muted); }
+  .form { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+  .form input {
+    flex: 1 1 12rem; min-width: 0; font: inherit; font-size: 1.0625rem; color: var(--text);
+    background: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 0.7rem 1.1rem;
+  }
+  .form input::placeholder { color: var(--faint); }
+  .form button {
+    flex: 1 1 100%; font: inherit; font-size: 1.125rem; font-weight: 500; cursor: pointer;
+    color: #0a0c16; border: 0; border-radius: 999px; padding: 0.75rem 1.25rem;
+    background: linear-gradient(90deg, var(--teal), #7fa6ff 55%, var(--violet));
+    transition: filter 0.2s ease;
+  }
+  .form button:hover { filter: brightness(1.08); }
+  .form-note { font-size: 0.9375rem; color: var(--faint); margin: 0; min-height: 1.5em; }
+  .form-note.done { color: var(--teal); }
+
+  /* Where we gather */
+  .spaces { display: grid; gap: 2rem; }
+  .platform h3 { font-weight: 500; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.5rem; }
+  .links { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .links li { border-bottom: 1px solid var(--line); }
+  .links a {
+    display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0.25rem 1rem;
+    padding: 0.9rem 0.25rem; text-decoration: none;
+  }
+  .links .name { font-size: 1.25rem; }
+  .links .what { grid-column: 1; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+  .links .go { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--faint); transition: transform 0.2s ease, color 0.2s ease; }
+  .links a:hover .go { color: var(--teal); transform: translateX(3px); }
+  .links a:hover .name { color: #ffffff; }
+  .links .heart .name::after {
+    content: "most active"; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); border: 1px solid rgba(69, 227, 200, 0.4); border-radius: 999px;
+    padding: 0.1rem 0.55rem; margin-left: 0.7rem; vertical-align: 0.2em; white-space: nowrap;
+  }
+
+  .conduct h3 { font-weight: 500; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.75rem; }
+  .conduct ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.6rem; color: var(--muted); font-size: 1.0625rem; line-height: 1.5; }
+  .conduct li::marker { color: var(--teal); }
+
+  /* Founding members */
+  .founders p a { text-decoration-color: var(--faint); text-underline-offset: 0.2em; }
+  .founders p a:hover { text-decoration-color: var(--teal); }
+  .founders cite { font-style: italic; }
+
+  /* Seva */
+  .seva { text-align: center; display: grid; justify-items: center; gap: 1.5rem; }
+  .verse { margin: 0; display: grid; gap: 0.35rem; }
+  .verse .deva { font-family: "Tiro Devanagari Sanskrit", var(--serif); font-size: 1.375rem; line-height: 1.7; color: var(--text); margin: 0; }
+  .verse .iast { font-style: italic; color: var(--muted); font-size: 1.0625rem; margin: 0; }
+  .verse .gloss { font-size: 1.25rem; margin: 0.6rem 0 0; text-wrap: balance; }
+  .verse cite { font-style: normal; font-size: 0.8125rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+  .seva .held { color: var(--muted); max-width: 30rem; margin: 0; text-wrap: balance; }
+  .give { display: grid; justify-items: center; gap: 0.85rem; }
+  .give .love { font-style: italic; font-size: 1.25rem; margin: 0; }
+  .give-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .give-links a {
+    text-decoration: none; font-size: 1.0625rem; letter-spacing: 0.04em;
+    border: 1px solid var(--line); border-radius: 999px; padding: 0.5rem 1.4rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .give-links a:hover { border-color: var(--teal); color: #ffffff; }
+  .rule { width: 3rem; height: 1px; border: 0; margin: 0; background: linear-gradient(90deg, var(--teal), var(--violet)); }
+
+  footer { border-top: 1px solid var(--line); padding-top: 1.75rem; color: var(--faint); font-size: 1rem; text-align: center; letter-spacing: 0.04em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .emblem { animation: none; }
+    .links .go, .form button, .give-links a { transition: none; }
+  }
