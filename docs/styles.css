@@ -158,3 +158,7 @@
 .form[hidden] { display: none; }
 .form-note a { color: var(--teal); text-underline-offset: 0.2em; }
 .form button:disabled { opacity: 0.6; cursor: wait; }
+.arrival .field { font-style: italic; font-size: 1.3125rem; line-height: 1.5; max-width: 28rem; margin: 2rem auto 0; text-wrap: balance; }
+.conduct-intro { color: var(--text); font-size: 1.0625rem; margin: 0 0 1rem; }
+.page-head .subtitle { font-style: italic; font-size: 1.375rem; color: var(--muted); margin: 0; }
+.about .rule { margin: 2.25rem 0 1.75rem; }
