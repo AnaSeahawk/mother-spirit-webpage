@@ -167,6 +167,6 @@
 .gathering h3 { font-weight: 500; font-size: 1.5rem; line-height: 1.25; margin: 0 0 0.35rem; }
 .gathering .meta, .tend .kept { color: var(--faint); font-size: 1rem; letter-spacing: 0.03em; }
 .gathering .links, .tend .links { margin-top: 1rem; }
-.gathering .soon { color: var(--teal); font-size: 1.0625rem; }
+.gathering .when { color: var(--teal); font-size: 1.0625rem; }
 .gatherings .note { color: var(--muted); }
 .tend .work h2 { margin-bottom: 0.75rem; }
