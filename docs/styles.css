@@ -175,3 +175,4 @@
 .member .line { font-style: italic; font-size: 1.25rem; }
 .member .links { margin-top: 1rem; }
 .founders .subhead:first-child { margin-top: 0; }
+.gathering .note { color: var(--muted); font-size: 1.0625rem; }
